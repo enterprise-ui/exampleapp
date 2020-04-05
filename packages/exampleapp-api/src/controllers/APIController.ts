@@ -5,7 +5,7 @@ import { getManager } from 'typeorm'
 @Controller('api')
 export class APIController {
    
-  @Get()
+  @Get('')
   private async get(req: Request, res: Response) {
     res.status(200).json({
         msg: 'Hello world'

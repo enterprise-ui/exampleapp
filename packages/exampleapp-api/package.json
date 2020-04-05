@@ -2,7 +2,7 @@
     "name": "@enterprise-ui/exampleapp-api",
     "version": "0.1.0",
     "description": "",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
       "test": "jest --coverage",
       "test:watch": "jest --coverage --watchAll",
@@ -10,21 +10,11 @@
       "build:watch": "onchange 'src/**/*.ts' -- npm run build",
       "view:coverage": "serve coverage/lcov-report",
       "clean": "rm -rf coverage src/**/*.js src/**/*.map",
-      "start": "ts-node src/index.ts",
+      "dev": "ts-node src/index.ts",
+      "start": "node dist/index.js",
       "importdata": "ts-node src/import.ts",
       "typeorm": "ts-node -r tsconfig-paths/register ../../node_modules/typeorm/cli.js --config src/config/TypeORM.ts"
     },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/olegsmetanin/geohash.git"
-    },
-    "keywords": [],
-    "author": "Oleg Smetanin",
-    "license": "ISC",
-    "bugs": {
-      "url": "https://github.com/olegsmetanin/geohash/issues"
-    },
-    "homepage": "https://github.com/olegsmetanin/geohash#readme",
     "devDependencies": {
       "@types/body-parser": "^1.19.0",
       "@types/cors": "^2.8.6",
@@ -51,7 +41,7 @@
       "body-parser": "^1.19.0",
       "cors": "^2.8.5",
       "express": "^4.17.1",
-      "sqlite3": "^4.1.1",
+      "pg": "^8.0.0",
       "typeorm": "^0.2.22"
     }
   }

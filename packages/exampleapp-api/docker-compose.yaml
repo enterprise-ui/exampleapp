@@ -1,40 +1,20 @@
 version: '3.5'
 
 services:
-  postgres:
-    container_name: postgres_container
-    image: postgres
+  app:
+    container_name: app_container
+    image: eui/api:8
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: db
-      PGDATA: /data/postgres
-    volumes:
-       - postgres:/data/postgres
+      DB_HOST: postgres
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_NAME: db
+      DB_PORT: 5432
+      DB_SYNC: "true"
+      PORT: 8080
     ports:
-      - "5432:5432"
+      - "3001:8080"
     networks:
       - postgres
     restart: unless-stopped
   
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@server.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    volumes:
-       - pgadmin:/root/.pgadmin
-    ports:
-      - "5050:80"
-    networks:
-      - postgres
-    restart: unless-stopped
-
-networks:
-  postgres:
-    driver: bridge
-
-volumes:
-    postgres:
-    pgadmin:
