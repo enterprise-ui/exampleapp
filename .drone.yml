@@ -5,11 +5,13 @@ steps:
   - name: build
     image: node:current-alpine
     environment:
-      NPMRC:
-        from_secret: NPMRC   
+      NPMREGISTRY:
+        from_secret: NPMREGISTRY
+      NPMAUTHTOKEN:
+        from_secret: NPMAUTHTOKEN
     commands:   
-      - npm config set $NPMRC
+      - npm config set $NPMREGISTRY
+      - npm config set $NPMAUTHTOKEN
       - yarn
       - cd packages/exampleapp-api
       - yarn build
-
