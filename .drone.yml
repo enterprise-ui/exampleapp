@@ -5,13 +5,16 @@ steps:
   - name: build
     image: node:current-alpine
     environment:
-      NPMREGISTRY:
-        from_secret: NPMREGISTRY
-      NPMAUTHTOKEN:
-        from_secret: NPMAUTHTOKEN
-    commands:   
-      - npm config set $NPMREGISTRY
-      - npm config set $NPMAUTHTOKEN
+      CI_DOMAIN:
+        from_secret: CI_DOMAIN
+      NPM_AUTH_TOKEN:
+        from_secret: NPM_AUTH_TOKEN
+    commands:
+      - echo "//$CI_DOMAIN/repository/npm/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
+      - echo "//$CI_DOMAIN/repository/npm-publish/:_authToken=$NPM_AUTH_TOKEN" >> .npmrc
+      - echo "registry=https://$CI_DOMAIN/repository/npm" >> .npmrc
+      - echo "always-auth=true" >> .npmrc   
       - yarn
       - cd packages/exampleapp-api
       - yarn build
+
